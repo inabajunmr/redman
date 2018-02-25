@@ -1,0 +1,25 @@
+version: 2
+## Customize the test machine
+jobs:
+  test:
+    docker:
+      - image: java:openjdk-8-jdk
+        environment:
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+    steps:
+      - checkout
+      - run: chmod +x ./gradlew # Grant execution permission
+      - run: ./gradlew --quiet build
+      - store_artifacts:
+          path: build/libs
+      - store_artifacts:
+          path: build/docs
+      - store_artifacts:
+          path: build/reports
+      - store_test_results:
+          path: build/test-results
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test
