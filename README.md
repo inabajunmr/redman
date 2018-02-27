@@ -9,6 +9,9 @@ Infrared signal manager.
 ## Sequence Diagram
 https://cacoo.com/diagrams/9lm4vRTa7oxogelN
 
+## Sitemap
+https://cacoo.com/diagrams/9lm4vRTa7oxogelN#3F631
+
 # References
 https://developer.nature.global/
 
