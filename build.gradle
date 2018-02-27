@@ -73,6 +73,16 @@ bootJar {
 	launchScript()
 }
 
+jacocoTestReport {
+	reports {
+		xml.enabled false
+		csv.enabled false
+		html.enabled true
+		//html.destination file("${buildDir}/jacocoHtml")
+	}
+}
+check.dependsOn jacocoTestReport
+
 jacocoTestCoverageVerification {
 	violationRules {
 		rule {
@@ -133,4 +143,10 @@ tasks.withType(Pmd) {
 
 jdepend {
 	ignoreFailures = false // エラー、警告でビルド停止
+}
+
+javadoc {
+	options.encoding = defaultEncoding
+	options.charSet = defaultEncoding
+	options.locale = 'ja'
 }

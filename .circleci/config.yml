@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - run: chmod +x ./gradlew # Grant execution permission
-      - run: ./gradlew --quiet build
+      - run: ./gradlew --quiet javadoc build
       - store_artifacts:
           path: build/libs
       - store_artifacts:
