@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * メインクラス.
  *
  * @author win2cot
- *
  */
 @SpringBootApplication
 public class Application {
