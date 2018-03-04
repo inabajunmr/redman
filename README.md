@@ -18,3 +18,13 @@ https://developer.nature.global/
 https://home.nature.global
 
 https://platform.ifttt.com/docs
+
+# Definition of terms
+## リソース
+エンドポイントをどう叩くか？の定義。このURLをこのパラメータで、このメソッドで、このヘッダで・・・のイメージ。
+
+## アクティビティ
+APIを叩くフローの定義。リソースをこの順番で、このタイミングでスリープを挟んで、ここで失敗したらXXXして・・・・のイメージ
+
+## アクション
+ない。
