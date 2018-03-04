@@ -7,9 +7,11 @@ Infrared signal manager.
 
 # Design
 ## Sequence Diagram
+![sequence]("https://cacoo.com/diagrams/9lm4vRTa7oxogelN-E7D7C.png")
 https://cacoo.com/diagrams/9lm4vRTa7oxogelN
 
 ## Sitemap
+![sitemap]("https://cacoo.com/diagrams/9lm4vRTa7oxogelN-3F631.png?")
 https://cacoo.com/diagrams/9lm4vRTa7oxogelN#3F631
 
 # References
