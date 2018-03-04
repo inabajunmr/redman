@@ -1,8 +1,11 @@
 buildscript {
 	ext {
+		groupId = 'xyz.dgz48'
+		artifactId = 'redman'
+		implementationVersion = '1.0.0.SNAPSHOT'
 		defaultEncoding  = 'UTF-8'
 		compatibility    = 1.8
-		springBootVersion = '2.0.0.RC2'
+		springBootVersion = '2.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -24,8 +27,8 @@ apply plugin: 'findbugs'
 apply plugin: 'pmd'
 apply plugin: 'jdepend'
 
-group = 'xyz.dgz48'
-version = '1.0.0.SNAPSHOT'
+group = groupId
+version = implementationVersion
 sourceCompatibility = compatibility
 targetCompatibility = compatibility
 
@@ -47,8 +50,10 @@ dependencies {
 	//compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-mail')
 	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.3.0')
+	compile('com.github.mxab.thymeleaf.extras:thymeleaf-extras-data-attribute:2.0.1')
 
 	compile('org.springframework.security:spring-security-oauth2-client')
 	compile('org.springframework.security:spring-security-oauth2-jose')
@@ -69,10 +74,13 @@ compileTestJava {
 
 bootJar {
 	mainClassName = 'xyz.dgz48.redman.Application'
-//	baseName = 'redman'
-//	version =  '0.0.1-SNAPSHOT'
 	manifest {
 		attributes 'Start-Class': 'xyz.dgz48.redman.Application'
+		attributes 'Implementation-Title': artifactId
+		attributes 'Implementation-Version': implementationVersion
+		attributes 'Implementation-Vendor': groupId
+		attributes 'Implementation-Vendor-Id': groupId
+		attributes 'Class-Path': configurations.compile.collect { it.getName() }.join(' ')
 	}
 	launchScript()
 }

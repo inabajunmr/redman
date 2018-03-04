@@ -16,6 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception { // NOPMD
         // Define NOPMD because HttpSecurity$authorizeRequests throws Exception.
         http.authorizeRequests()
+                .antMatchers("/css/**", "/img/**", "/js/**", "/lib/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .logout().permitAll()

@@ -1,15 +1,40 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base.html}">
 <head>
-    <meta charset="UTF-8">
-    <title>Redman/Login page</title>
+<title layout:fragment="title">ダッシュボード - redman</title>
 </head>
 <body>
-<div class="container">
-    <h1>REDMAN</h1>
-    <p>
-        ログインしてます。
-    </p>
-</div>
+	<!--/* Content-Header title */-->
+	<h1 layout:fragment="content-header-h1">ダッシュボード <small>現在の利用状況です。</small></h1>
+
+	<!--/* breadcrumb */-->
+	<ol layout:fragment="breadcrumb">
+		<li class="active"><a th:href="@{/index.html}"><i class="fa fa-dashboard"></i> Home</a></li>
+	</ol>
+
+	<!--/* Main content */-->
+	<section layout:fragment="main-content">
+
+		<div class="row">
+			<div class="col-xs-12">
+				<!--
+				|++++++++++++++++++++++++|
+				| Your Page Content Here |
+				|++++++++++++++++++++++++|
+				 -->
+				 ログインしてます。
+			</div>
+		</div>
+
+		<div class="row mgt20">
+			<div class="col-xs-12 col-md-3"></div>
+			<div class="col-xs-12 col-md-6">Content</div>
+			<div class="col-xs-12 col-md-3"></div>
+		</div>
+
+	</section>
 </body>
 </html>
