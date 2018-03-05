@@ -10,6 +10,6 @@ spring:
 #    ansi:
 #      enabled: ALWAYS
   security.oauth2.client.registration:
-          google:
-            client-id: xxxxx
-            client-secret: xxxxx
+    google:
+      client-id: xxxxx
+      client-secret: xxxxx
