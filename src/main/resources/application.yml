@@ -13,3 +13,14 @@ spring:
     google:
       client-id: xxxxx
       client-secret: xxxxx
+  jmx:
+    enable: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  datasource:
+    url: jdbc:h2:./registrator
+  jpa:
+    hibernate:
+      ddl-auto: validate

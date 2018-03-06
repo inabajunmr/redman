@@ -15,18 +15,19 @@ public class User {
 	 */
 	@Id
 	@Column(name = "user_id")
-	private final String userId;
+	private String userId;
 
 	/**
 	 * Spring securityにとってのUserの識別子.
 	 */
 	@Column(unique=true, name = "idp_user_name")
-	private final String idpUserName;
+	private String idpUserName;
 
 	/**
 	 * Idpの種別.
 	 */
-	private final IdpType idpType;
+	@Column(name = "idp_type")
+	private IdpType idpType;
 
 	/**
 	 * コンストラクタ.
@@ -41,5 +42,10 @@ public class User {
 		this.idpType = idpType;
 	}
 
+	/**
+	 * Hibernateのためのデフォルトコンストラクタ.
+	 */
+	public User(){
 
+	}
 }
