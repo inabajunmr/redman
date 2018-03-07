@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class User {
 
 	/**
-	 * このアプリケーション内に置けるUserの識別子.別のリソースとの外部参照のキーはこちらを使う。
+	 * このアプリケーション内に置けるUserの識別子.別のリソースとの外部参照のキーはこちらを使う.
 	 */
 	@Id
 	@Column(name = "user_id")
@@ -18,7 +18,7 @@ public class User {
 	/**
 	 * Spring securityにとってのUserの識別子.
 	 */
-	@Column(unique=true, name = "idp_user_name")
+	@Column(unique = true, name = "idp_user_name")
 	private String idpUserName;
 
 	/**
@@ -35,7 +35,7 @@ public class User {
 	 * @param idpType idpType
 	 *
 	 */
-	public User(String userId, String idpUserName, IdpType idpType){
+	public User(final String userId, final String idpUserName, final IdpType idpType) {
 		this.userId = userId;
 		this.idpUserName = idpUserName;
 		this.idpType = idpType;
@@ -44,7 +44,7 @@ public class User {
 	/**
 	 * Hibernateのためのデフォルトコンストラクタ.
 	 */
-	public User(){
+	public User() {
 
 	}
 }

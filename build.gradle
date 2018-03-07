@@ -62,7 +62,7 @@ dependencies {
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
-	testCompile('com.h2database.h2:1.4.196')
+	testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
 
 }
 
