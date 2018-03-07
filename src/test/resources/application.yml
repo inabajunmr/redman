@@ -1,14 +1,3 @@
-
 spring:
-  jmx:
-    enable: false
-  mvc:
-    throw-exception-if-no-handler-found: true
-  resources:
-    add-mappings: false
-  jpa:
-    hibernate:
-      ddl-auto: validate
-    properties:
-          hibernate:
-            format_sql: true
+  datasource:
+    url: jdbc:h2:./test;MODE=MySQL

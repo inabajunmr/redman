@@ -1,8 +1,6 @@
 package xyz.dgz48.redman.domain.user;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * User.
@@ -27,6 +25,7 @@ public class User {
 	 * Idpの種別.
 	 */
 	@Column(name = "idp_type")
+	@Enumerated(EnumType.STRING)
 	private IdpType idpType;
 
 	/**

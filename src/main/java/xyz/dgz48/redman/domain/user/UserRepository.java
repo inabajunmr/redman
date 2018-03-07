@@ -1,7 +1,6 @@
 package xyz.dgz48.redman.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  * Repository for user.
@@ -9,9 +8,9 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, String> {
 
 	/**
-	 * Find {@link User} resource by idpUserName
-	 * @param idpUserName
-	 * @return
+	 * Find {@link User} resource by idpUserName(Spring security username).
+	 * @param idpUserName idpUserName
+	 * @return user
 	 */
 	public User findByIdpUserName(String idpUserName);
 }
