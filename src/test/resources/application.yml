@@ -1,3 +1,26 @@
+####################################################################################################
+# spring
+####################################################################################################
 spring:
   datasource:
     url: jdbc:h2:./test;MODE=MySQL
+  profiles:
+    active: debug
+  thymeleaf:
+    mode: HTML
+#  output:
+#    ansi:
+#      enabled: ALWAYS
+  security.oauth2.client.registration:
+    google:
+      client-id: xxxxx
+      client-secret: xxxxx
+  jmx:
+    enable: false
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  jpa:
+    hibernate:
+      ddl-auto: validate
