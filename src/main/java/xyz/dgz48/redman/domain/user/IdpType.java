@@ -6,7 +6,7 @@ package xyz.dgz48.redman.domain.user;
 public enum IdpType {
 
 	/**
-	 * Goolge.
+	 * Google.
 	 */
 	GOOGLE,
 }
