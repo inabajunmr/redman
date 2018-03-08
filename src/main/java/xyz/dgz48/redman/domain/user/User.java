@@ -2,18 +2,18 @@ package xyz.dgz48.redman.domain.user;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 /**
  * User.
  */
 @Entity
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
+//@Getter
+@Data
+@Table(name = "user")
 public class User {
 
 	/**
