@@ -11,9 +11,9 @@ import lombok.*;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-//@Getter
-@Data
+@Getter
 @Table(name = "user")
+@EqualsAndHashCode
 public class User {
 
 	/**
