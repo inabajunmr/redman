@@ -2,10 +2,18 @@ package xyz.dgz48.redman.domain.user;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+
 /**
  * User.
  */
 @Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
 	/**
@@ -27,24 +35,4 @@ public class User {
 	@Column(name = "idp_type")
 	@Enumerated(EnumType.STRING)
 	private IdpType idpType;
-
-	/**
-	 * コンストラクタ.
-	 * @param userId userId
-	 * @param idpUserName idpUserName
-	 * @param idpType idpType
-	 *
-	 */
-	public User(final String userId, final String idpUserName, final IdpType idpType) {
-		this.userId = userId;
-		this.idpUserName = idpUserName;
-		this.idpType = idpType;
-	}
-
-	/**
-	 * Hibernateのためのデフォルトコンストラクタ.
-	 */
-	public User() {
-
-	}
 }

@@ -60,9 +60,11 @@ dependencies {
 
 	compile('org.flywaydb:flyway-core')
 	runtime('org.springframework.boot:spring-boot-devtools')
+	compileOnly('org.projectlombok:lombok')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile('org.springframework.security:spring-security-test')
 	testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
+
 
 }
 
@@ -131,6 +133,11 @@ findbugs {
 	ignoreFailures = false // エラー、警告でビルド停止
 	reportLevel = 'low' // どのぐらい細かいやつを問題視するか[low|medium|high]
 	showProgress = false
+}
+
+
+jacoco {
+	toolVersion = "0.8.0"
 }
 
 tasks.withType(FindBugs) {
