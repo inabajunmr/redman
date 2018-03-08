@@ -1,4 +1,7 @@
 # Redman
+
+[![CircleCI](https://circleci.com/gh/DGZ48/redman.svg?style=svg)](https://circleci.com/gh/DGZ48/redman)
+
 Infrared signal manager.
 
 # このリポジトリの大雑把な目標
