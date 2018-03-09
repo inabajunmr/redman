@@ -23,10 +23,11 @@ public class UserService {
 	 * Find User by idpUserName.
 	 *
 	 * @param idpUserName key
+	 * @param idpType key
 	 * @return user
 	 */
-	public Optional<User> findUserByIdpUserName(final String idpUserName) {
-		return userRepository.findByIdpUserName(idpUserName);
+	public Optional<User> findUserByIdpUserName(final String idpUserName, final IdpType idpType) {
+		return userRepository.findByIdpUserNameAndIdpType(idpUserName, idpType);
 	}
 
 	/**

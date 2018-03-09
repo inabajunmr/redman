@@ -9,4 +9,9 @@ public enum IdpType {
 	 * Google.
 	 */
 	GOOGLE,
+
+	/**
+	 * GitHub.(Not Implemented already).
+	 */
+	GITHUB,
 }

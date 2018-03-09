@@ -12,7 +12,8 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@Table(name = "user")
+@Table(name = "user", uniqueConstraints = {
+		@UniqueConstraint(columnNames = {"idp_user_name", "idp_type"})})
 @EqualsAndHashCode
 public class User {
 
@@ -26,7 +27,7 @@ public class User {
 	/**
 	 * Spring securityにとってのUserの識別子.
 	 */
-	@Column(unique = true, name = "idp_user_name")
+	@Column(name = "idp_user_name")
 	private String idpUserName;
 
 	/**

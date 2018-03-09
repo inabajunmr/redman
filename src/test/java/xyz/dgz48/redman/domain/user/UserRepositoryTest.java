@@ -18,6 +18,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class UserRepositoryTest {
 
 	/**
+	 * Test data.
+	 */
+	private final User expect = new User("test-id", "test-user-name", IdpType.GOOGLE);
+
+	/**
 	 * Test target.
 	 */
 	@Autowired
@@ -31,11 +36,10 @@ public class UserRepositoryTest {
 	@Test
 	public void testFindByIdpUserNameExist() throws Exception {
 		// set up
-		User expect = new User("test-id", "test-user-name", IdpType.GOOGLE);
 		this.sut.save(expect);
 
 		// exercise
-		Optional<User> actual = this.sut.findByIdpUserName("test-user-name");
+		Optional<User> actual = this.sut.findByIdpUserNameAndIdpType(expect.getIdpUserName(), expect.getIdpType());
 
 		// verify
 		assertThat(actual.get()).isEqualTo(expect);
@@ -49,7 +53,41 @@ public class UserRepositoryTest {
 	@Test
 	public void testFindByIdpUserNameNotExist() throws Exception {
 		// exercise
-		Optional<User> actual = this.sut.findByIdpUserName("test-user-name");
+		Optional<User> actual = this.sut.findByIdpUserNameAndIdpType("test-user-name-diff", IdpType.GITHUB);
+
+		// verify
+		assertThat(actual).isEmpty();
+	}
+
+	/**
+	 * Test for findByIdpUserName.
+	 *
+	 * @throws Exception exception
+	 */
+	@Test
+	public void testFindByIdpUserNameNotExistMatchOnlyIdpUserName() throws Exception {
+		// exercise
+		this.sut.save(expect);
+
+		// exercise
+		Optional<User> actual = this.sut.findByIdpUserNameAndIdpType(expect.getIdpUserName(), IdpType.GITHUB);
+
+		// verify
+		assertThat(actual).isEmpty();
+	}
+
+	/**
+	 * Test for findByIdpUserName.
+	 *
+	 * @throws Exception exception
+	 */
+	@Test
+	public void testFindByIdpUserNameNotExistMatchOnlyIdpType() throws Exception {
+		// exercise
+		this.sut.save(expect);
+
+		// exercise
+		Optional<User> actual = this.sut.findByIdpUserNameAndIdpType("test-user-name-diff", expect.getIdpType());
 
 		// verify
 		assertThat(actual).isEmpty();

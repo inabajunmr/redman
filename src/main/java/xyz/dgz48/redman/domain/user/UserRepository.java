@@ -13,7 +13,8 @@ interface UserRepository extends JpaRepository<User, String> {
 	/**
 	 * Find {@link User} resource by idpUserName(Spring security username).
 	 * @param idpUserName idpUserName
+	 * @param idpType idpType
 	 * @return user
 	 */
-	Optional<User> findByIdpUserName(String idpUserName);
+	Optional<User> findByIdpUserNameAndIdpType(String idpUserName, IdpType idpType);
 }

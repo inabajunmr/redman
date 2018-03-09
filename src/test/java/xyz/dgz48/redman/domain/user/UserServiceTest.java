@@ -44,10 +44,10 @@ public class UserServiceTest {
 	@Test
 	public void findUserByIdpUserNameExist() {
 		// set up
-		when(userRepository.findByIdpUserName(anyString())).thenReturn(Optional.of(testUser));
+		when(userRepository.findByIdpUserNameAndIdpType(anyString(), any())).thenReturn(Optional.of(testUser));
 
 		// exercise
-		Optional<User> actual = sut.findUserByIdpUserName(testUser.getIdpUserName());
+		Optional<User> actual = sut.findUserByIdpUserName(testUser.getIdpUserName(), testUser.getIdpType());
 
 		// verify
 		assertThat(actual.get()).isEqualTo(testUser);
@@ -59,10 +59,10 @@ public class UserServiceTest {
 	@Test
 	public void findUserByIdpUserNameNotExist() {
 		// set up
-		when(userRepository.findByIdpUserName(anyString())).thenReturn(Optional.empty());
+		when(userRepository.findByIdpUserNameAndIdpType(anyString(), any())).thenReturn(Optional.empty());
 
 		// exercise
-		Optional<User> actual = sut.findUserByIdpUserName(testUser.getIdpUserName());
+		Optional<User> actual = sut.findUserByIdpUserName(testUser.getIdpUserName(), testUser.getIdpType());
 
 		// verify
 		assertThat(actual).isEmpty();
