@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base.html}">
+<head>
+<title layout:fragment="title">リソース登録 - redman</title>
+</head>
+<body>
+	<!--/* Content-Header title */-->
+	<h1 layout:fragment="content-header-h1">
+		リソース登録 <small>登録するリソースの情報を入力してください。</small>
+	</h1>
+
+	<!--/* breadcrumb */-->
+	<ol layout:fragment="breadcrumb">
+		<li><a th:href="@{/index.html}"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li><a th:href="@{.}">リソース</a></li>
+		<li class="active">Here</li>
+	</ol>
+
+	<!--/* Main content */-->
+	<section layout:fragment="main-content">
+
+		<div class="row">
+			<div class="col-xs-12">Content</div>
+		</div>
+
+		<div class="row mgt20">
+			<div class="col-xs-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">リソース</h3>
+					</div>
+
+					<form method="post" action="confirm.html" th:action="@{/resource/new/input.html}">
+						<div class="box-body">
+							<div class="form-group">
+								<label for="id">ID</label>
+								<input type="text" class="form-control input-lg" id="id" placeholder="※自動で採番されます。" disabled />
+							</div>
+							<div class="form-group">
+								<label for="name">名称</label>
+								<input type="text" class="form-control input-lg" id="name" name="lastName" placeholder="わかりやすい名称を入力してください" />
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-2">
+										<label for="method">HTTPメソッド</label>
+										<select class="form-control input-lg" id="method" name="method">
+											<option>GET</option>
+											<option>POST</option>
+											<option>PUT</option>
+											<option>DELETE</option>
+										</select>
+									</div>
+									<div class="col-xs-10">
+										<label for="url">URL</label>
+										<input type="text" class="form-control input-lg" id="url" name="url" placeholder="https://redman.dgz48.xyz/api/action/1/send">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="header">HTTPヘッダー</label>
+								<div class="row">
+									<div class="col-xs-5">
+										<input type="text" class="form-control input-lg" id="header[0].key" name="header[0].key" placeholder="Authorization">
+									</div>
+									<div class="col-xs-5">
+										<input type="text" class="form-control input-lg" id="header[0].value" name="header[0].value" placeholder="Bearer XXXXXXXXXX">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" name="delete" id="delete" class="btn btn-default btn-lg">削除</button>
+									</div>
+								</div>
+								<div class="row mgt10">
+									<div class="col-xs-5">
+										<input type="text" class="form-control input-lg" id="header[0].key" name="header[0].key" placeholder="Conetnt-Type">
+									</div>
+									<div class="col-xs-5">
+										<input type="text" class="form-control input-lg" id="header[0].value" name="header[0].value" placeholder="application/x-www-form-urlencoded">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" name="delete" id="delete" class="btn btn-default btn-lg">削除</button>
+									</div>
+								</div>
+								<div class="row mgt10">
+									<div class="col-xs-5">
+										<input type="text" class="form-control input-lg" id="header[0].key" name="header[0].key" placeholder="">
+									</div>
+									<div class="col-xs-5">
+										<input type="text" class="form-control input-lg" id="header[0].value" name="header[0].value" placeholder="">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" name="delete" id="delete" class="btn btn-default btn-lg">削除</button>
+									</div>
+								</div>
+								<div class="row mgt10">
+									<div class="col-xs-5">
+										<input type="text" class="form-control input-lg" id="header[0].key" name="header[0].key" placeholder="">
+									</div>
+									<div class="col-xs-5">
+										<input type="text" class="form-control input-lg" id="header[0].value" name="header[0].value" placeholder="">
+									</div>
+									<div class="col-xs-2">
+										<button type="button" name="delete" id="delete" class="btn btn-default btn-lg">削除</button>
+									</div>
+								</div>
+								<div class="row mgt10">
+									<div class="col-xs-12">
+										<button type="button" name="add" id="add" class="btn btn-default btn-lg">入力欄を増やす</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="body">HTTPボディ</label>
+								<textarea class="form-control" id="body" name="body" rows="10" placeholder="param1=value1&params2=value2&params3=value=3"></textarea>
+							</div>
+						</div>
+
+						<div class="box-footer clearfix">
+							<a href="../detail.html" th:href="@{/resource/1/detail.html}" class="btn btn-default btn-lg">戻る</a>
+							<button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg">次へ</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
