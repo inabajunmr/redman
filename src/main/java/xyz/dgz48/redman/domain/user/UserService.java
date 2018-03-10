@@ -2,22 +2,21 @@ package xyz.dgz48.redman.domain.user;
 
 
 import java.util.Optional;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
- * Service for {@User}.
+ * Service for {@link User}.
  */
 @Service
 @Transactional
 public class UserService {
 
 	/**
-	 * Repository for {@User}.
+	 * Repository for {@link User}.
 	 */
 	@Autowired
 	private UserRepository userRepository;
