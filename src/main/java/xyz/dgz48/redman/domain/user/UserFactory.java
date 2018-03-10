@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 
 /**
- * {@User} factory.
+ * {@link User} factory.
  */
 @Component
 public class UserFactory {
