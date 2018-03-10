@@ -20,23 +20,23 @@ public class UserService {
 	private UserRepository userRepository;
 
 	/**
-	 * Find User by idpUserName.
+	 * Find UserEntity by idpUserName.
 	 *
 	 * @param idpUserName key
 	 * @param idpType key
 	 * @return user
 	 */
 	public Optional<User> findUserByIdpUserName(final String idpUserName, final IdpType idpType) {
-		return userRepository.findByIdpUserNameAndIdpType(idpUserName, idpType);
+		return UserFactory.create(userRepository.findByIdpUserNameAndIdpType(idpUserName, idpType));
 	}
 
 	/**
-	 * Upsert new {@link User}.
+	 * Upsert new {@link UserEntity}.
 	 * @param user register target
 	 * @return register user
 	 */
 	public User saveUser(final User user) {
-		return userRepository.save(user);
+		return UserFactory.create(userRepository.save(new UserEntity(user.getUserId(), user.getIdpUserName(), user.getIdpType())));
 	}
 
 }

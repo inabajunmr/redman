@@ -20,7 +20,7 @@ public class UserRepositoryTest {
 	/**
 	 * Test data.
 	 */
-	private final User expect = new User("test-id", "test-user-name", IdpType.GOOGLE);
+	private final UserEntity expect = new UserEntity("test-id", "test-user-name", IdpType.GOOGLE);
 
 	/**
 	 * Test target.
@@ -39,7 +39,7 @@ public class UserRepositoryTest {
 		this.sut.save(expect);
 
 		// exercise
-		Optional<User> actual = this.sut.findByIdpUserNameAndIdpType(expect.getIdpUserName(), expect.getIdpType());
+		Optional<UserEntity> actual = this.sut.findByIdpUserNameAndIdpType(expect.getIdpUserName(), expect.getIdpType());
 
 		// verify
 		assertThat(actual.get()).isEqualTo(expect);
@@ -53,7 +53,7 @@ public class UserRepositoryTest {
 	@Test
 	public void testFindByIdpUserNameNotExist() throws Exception {
 		// exercise
-		Optional<User> actual = this.sut.findByIdpUserNameAndIdpType("test-user-name-diff", IdpType.GITHUB);
+		Optional<UserEntity> actual = this.sut.findByIdpUserNameAndIdpType("test-user-name-diff", IdpType.GITHUB);
 
 		// verify
 		assertThat(actual).isEmpty();
@@ -70,7 +70,7 @@ public class UserRepositoryTest {
 		this.sut.save(expect);
 
 		// exercise
-		Optional<User> actual = this.sut.findByIdpUserNameAndIdpType(expect.getIdpUserName(), IdpType.GITHUB);
+		Optional<UserEntity> actual = this.sut.findByIdpUserNameAndIdpType(expect.getIdpUserName(), IdpType.GITHUB);
 
 		// verify
 		assertThat(actual).isEmpty();
@@ -87,7 +87,7 @@ public class UserRepositoryTest {
 		this.sut.save(expect);
 
 		// exercise
-		Optional<User> actual = this.sut.findByIdpUserNameAndIdpType("test-user-name-diff", expect.getIdpType());
+		Optional<UserEntity> actual = this.sut.findByIdpUserNameAndIdpType("test-user-name-diff", expect.getIdpType());
 
 		// verify
 		assertThat(actual).isEmpty();

@@ -27,15 +27,15 @@ public class UserServiceTest {
 	private UserService sut;
 
 	/**
-	 * Mock repositry for {@User}.
+	 * Mock repository for {@User}.
 	 */
 	@Mock
 	private UserRepository userRepository;
 
 	/**
-	 * {@link User} for test.
+	 * {@link UserEntity} for test.
 	 */
-	private final User testUser = new User("id", "name", IdpType.GOOGLE);
+	private final UserEntity testUserEntity = new UserEntity("id", "name", IdpType.GOOGLE);
 
 
 	/**
@@ -44,13 +44,13 @@ public class UserServiceTest {
 	@Test
 	public void findUserByIdpUserNameExist() {
 		// set up
-		when(userRepository.findByIdpUserNameAndIdpType(anyString(), any())).thenReturn(Optional.of(testUser));
+		when(userRepository.findByIdpUserNameAndIdpType(anyString(), any())).thenReturn(Optional.of(testUserEntity));
 
 		// exercise
-		Optional<User> actual = sut.findUserByIdpUserName(testUser.getIdpUserName(), testUser.getIdpType());
+		Optional<User> actual = sut.findUserByIdpUserName(testUserEntity.getIdpUserName(), testUserEntity.getIdpType());
 
 		// verify
-		assertThat(actual.get()).isEqualTo(testUser);
+		assertThat(actual.get()).isEqualTo(UserFactory.create(Optional.of(testUserEntity)).get());
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class UserServiceTest {
 		when(userRepository.findByIdpUserNameAndIdpType(anyString(), any())).thenReturn(Optional.empty());
 
 		// exercise
-		Optional<User> actual = sut.findUserByIdpUserName(testUser.getIdpUserName(), testUser.getIdpType());
+		Optional<User> actual = sut.findUserByIdpUserName(testUserEntity.getIdpUserName(), testUserEntity.getIdpType());
 
 		// verify
 		assertThat(actual).isEmpty();
@@ -74,13 +74,13 @@ public class UserServiceTest {
 	@Test
 	public void upsertUserInsert() {
 		// set up
-		when(userRepository.save(testUser)).thenReturn(testUser);
+		when(userRepository.save(testUserEntity)).thenReturn(testUserEntity);
 
 		// exercise
-		User actual = sut.saveUser(testUser);
+		User actual = sut.saveUser(UserFactory.create(testUserEntity));
 
 		// verify
-		verify(userRepository, times(1)).save(testUser);
-		assertThat(actual).isEqualTo(testUser);
+		verify(userRepository, times(1)).save(testUserEntity);
+		assertThat(actual).isEqualTo(UserFactory.create(testUserEntity));
 	}
 }
