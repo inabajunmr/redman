@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -25,6 +26,12 @@ public class UserServiceTest {
 	 */
 	@InjectMocks
 	private UserService sut;
+
+	/**
+	 * {@link User} factory.
+	 */
+	@Spy
+	private UserFactory userFactory;
 
 	/**
 	 * Mock repository for {@User}.
@@ -50,7 +57,7 @@ public class UserServiceTest {
 		Optional<User> actual = sut.findUserByIdpUserName(testUserEntity.getIdpUserName(), testUserEntity.getIdpType());
 
 		// verify
-		assertThat(actual.get()).isEqualTo(UserFactory.create(Optional.of(testUserEntity)).get());
+		assertThat(actual.get()).isEqualTo(userFactory.create(Optional.of(testUserEntity)).get());
 	}
 
 	/**
@@ -77,10 +84,10 @@ public class UserServiceTest {
 		when(userRepository.save(testUserEntity)).thenReturn(testUserEntity);
 
 		// exercise
-		User actual = sut.saveUser(UserFactory.create(testUserEntity));
+		User actual = sut.saveUser(userFactory.create(testUserEntity));
 
 		// verify
 		verify(userRepository, times(1)).save(testUserEntity);
-		assertThat(actual).isEqualTo(UserFactory.create(testUserEntity));
+		assertThat(actual).isEqualTo(userFactory.create(testUserEntity));
 	}
 }

@@ -2,15 +2,18 @@ package xyz.dgz48.redman.domain.user;
 
 
 import java.util.Optional;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 
 /**
  * Service for {@User}.
  */
 @Service
+@Transactional
 public class UserService {
 
 	/**
@@ -20,6 +23,12 @@ public class UserService {
 	private UserRepository userRepository;
 
 	/**
+	 * {@link User} factory.
+	 */
+	@Autowired
+	private UserFactory userFactory;
+
+	/**
 	 * Find UserEntity by idpUserName.
 	 *
 	 * @param idpUserName key
@@ -27,7 +36,7 @@ public class UserService {
 	 * @return user
 	 */
 	public Optional<User> findUserByIdpUserName(final String idpUserName, final IdpType idpType) {
-		return UserFactory.create(userRepository.findByIdpUserNameAndIdpType(idpUserName, idpType));
+		return userFactory.create(userRepository.findByIdpUserNameAndIdpType(idpUserName, idpType));
 	}
 
 	/**
@@ -36,7 +45,7 @@ public class UserService {
 	 * @return register user
 	 */
 	public User saveUser(final User user) {
-		return UserFactory.create(userRepository.save(new UserEntity(user.getUserId(), user.getIdpUserName(), user.getIdpType())));
+		return userFactory.create(userRepository.save(new UserEntity(user.getUserId(), user.getIdpUserName(), user.getIdpType())));
 	}
 
 }

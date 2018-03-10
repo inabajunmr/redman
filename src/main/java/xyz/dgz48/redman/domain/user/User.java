@@ -1,15 +1,11 @@
 package xyz.dgz48.redman.domain.user;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
+import lombok.Value;
 
 /**
  * User Dommain Object.
  */
-@AllArgsConstructor
-@Getter
-@EqualsAndHashCode
+@Value
 public class User {
 
 	/**
