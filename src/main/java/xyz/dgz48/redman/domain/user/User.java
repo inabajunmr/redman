@@ -3,7 +3,7 @@ package xyz.dgz48.redman.domain.user;
 import lombok.Value;
 
 /**
- * User Dommain Object.
+ * User Domain Object.
  */
 @Value
 public class User {
