@@ -16,6 +16,7 @@ public class LoginController {
     /**
      * 認証後に表示するページ.
      *
+     * @param session session
      * @param authentication authentication info
      * @return index page
      */
