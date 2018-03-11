@@ -28,6 +28,12 @@ public class UserService {
 	private UserFactory userFactory;
 
 	/**
+	 * {@link UserEntity} factory.
+	 */
+	@Autowired
+	private UserEntityFactory userEntityFactory;
+
+	/**
 	 * Find UserEntity by idpUserName.
 	 *
 	 * @param idpUserName key
@@ -44,7 +50,7 @@ public class UserService {
 	 * @return register user
 	 */
 	public User saveUser(final User user) {
-		return userFactory.create(userRepository.save(new UserEntity(user.getUserId(), user.getIdpUserName(), user.getIdpType())));
+		return userFactory.create(userRepository.save(userEntityFactory.create(user)));
 	}
 
 }

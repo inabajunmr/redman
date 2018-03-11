@@ -34,6 +34,12 @@ public class UserServiceTest {
 	private UserFactory userFactory;
 
 	/**
+	 * {@link UserEntity} factory.
+	 */
+	@Spy
+	private UserEntityFactory userEntityFactory; // NOPMD
+
+	/**
 	 * Mock repository for {@User}.
 	 */
 	@Mock
