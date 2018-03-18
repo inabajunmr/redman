@@ -19,6 +19,11 @@ public class User {
 	private String idpUserName;
 
 	/**
+	 * メールアドレス.
+	 */
+	private String email;
+
+	/**
 	 * Idpの種別.
 	 */
 	private IdpType idpType;

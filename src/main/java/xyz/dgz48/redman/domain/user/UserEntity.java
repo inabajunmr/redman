@@ -31,6 +31,12 @@ public class UserEntity {
 	private String idpUserName;
 
 	/**
+	 * メールアドレス.
+	 */
+	@Column(name = "email")
+	private String email;
+
+	/**
 	 * Idpの種別.
 	 */
 	@Column(name = "idp_type")

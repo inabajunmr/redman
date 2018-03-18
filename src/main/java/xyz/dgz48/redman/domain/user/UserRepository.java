@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * Repository for user.
  */
-interface UserRepository extends JpaRepository<UserEntity, String> {
+public interface UserRepository extends JpaRepository<UserEntity, String> {
 
 	/**
 	 * Find {@link UserEntity} resource by idpUserName(Spring security username).

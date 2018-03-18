@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Profile("debug")
-public class DevelopmentControllerTest {
+public class DevelopmentControllerIntegrationTest {
 
 	/**
 	 * MockMvc.

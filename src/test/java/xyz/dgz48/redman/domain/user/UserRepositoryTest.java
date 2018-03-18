@@ -20,7 +20,7 @@ public class UserRepositoryTest {
 	/**
 	 * Test data.
 	 */
-	private final UserEntity expect = new UserEntity("test-id", "test-user-name", IdpType.GOOGLE);
+	private final UserEntity expect = new UserEntity("test-id", "test-user-name", "test@example.com", IdpType.GOOGLE);
 
 	/**
 	 * Test target.

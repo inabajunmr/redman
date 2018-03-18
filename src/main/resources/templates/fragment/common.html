@@ -62,13 +62,13 @@ Make sure you apply the skin class to the body tag so the changes take effect.
 								<!--/* The user image in the navbar */-->
 								<img src="../static/img/alien.png" th:src="@{/img/alien.png}" class="user-image" alt="User Image" />
 								<!--/* hidden-xs hides the username on small devices so only the image appears. */-->
-								<span class="hidden-xs">結城 明日奈</span>
+						<span class="hidden-xs" th:text="${userInfo.email}">結城 明日奈</span>
 							</a>
 							<ul class="dropdown-menu">
 								<!--/* The user image in the menu */-->
 								<li class="user-header">
 									<img src="../static/img/alien.png" th:src="@{/img/alien.png}" class="img-circle" alt="User Image" />
-									<p>
+									<p th:text="${userInfo.email}" >
 										結城 明日奈 - Development Supporter
 										<small>Member since Jan. 2016</small>
 									</p>
@@ -115,7 +115,7 @@ Make sure you apply the skin class to the body tag so the changes take effect.
 						<img src="../static/img/alien.png" th:src="@{/img/alien.png}" class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
-						<p>結城 明日奈</p>
+						<p th:text="${userInfo.email}">結城 明日奈</p>
 						<!--/* Status */-->
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>

@@ -25,12 +25,12 @@ public class UserEntityFactoryTest {
 	/**
 	 * {@User} for test.
 	 */
-	private final User testUser = new User("id", "name", IdpType.GOOGLE);
+	private final User testUser = new User("id", "name", "test@example.com", IdpType.GOOGLE);
 
 	/**
 	 * {@UserEntity} for test.
 	 */
-	private final UserEntity testUserEntity = new UserEntity("id", "name", IdpType.GOOGLE);
+	private final UserEntity testUserEntity = new UserEntity("id", "name", "test@example.com", IdpType.GOOGLE);
 
 
 	/**

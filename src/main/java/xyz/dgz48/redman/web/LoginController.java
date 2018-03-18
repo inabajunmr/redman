@@ -1,5 +1,6 @@
 package xyz.dgz48.redman.web;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,16 +10,21 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Controller for login.
  */
 @Controller
+@Slf4j
 public class LoginController {
 
     /**
-     * 認証後に表示するページ。最終的にリソースの一覧か何かになると思う.
+     * 認証後に表示するページ.
      *
      * @param authentication authentication info
-     * @return user info
+     * @return index page
      */
     @GetMapping("/")
     public String index(final OAuth2AuthenticationToken authentication) {
+        log.info("Login user:{} from:{}",
+                authentication.getName(), authentication.getAuthorizedClientRegistrationId());
+        log.debug("Login user attributes:{}", authentication.getPrincipal().getAttributes());
+
         return "index";
     }
 

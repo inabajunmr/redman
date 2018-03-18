@@ -14,7 +14,7 @@ public class UserEntityFactory {
 	 * @return {@link User}
 	 */
 	public UserEntity create(final User user) {
-		return new UserEntity(user.getUserId(), user.getIdpUserName(), user.getIdpType());
+		return new UserEntity(user.getUserId(), user.getIdpUserName(), user.getEmail(), user.getIdpType());
 	}
 
 }

@@ -3,6 +3,7 @@ package xyz.dgz48.redman.domain.user;
 
 import java.util.Optional;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@Slf4j
 public class UserService {
 
 	/**
@@ -50,6 +52,7 @@ public class UserService {
 	 * @return register user
 	 */
 	public User saveUser(final User user) {
+		log.info("Save user:{}", user.getIdpUserName(), user.getIdpUserName());
 		return userFactory.create(userRepository.save(userEntityFactory.create(user)));
 	}
 

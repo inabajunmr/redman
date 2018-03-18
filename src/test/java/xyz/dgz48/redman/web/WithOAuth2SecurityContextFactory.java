@@ -29,16 +29,20 @@ public class WithOAuth2SecurityContextFactory implements WithSecurityContextFact
      */
     @Override
     public SecurityContext createSecurityContext(final WithMockOAuth2User user) {
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
+
         Map<String, Object> claims = new HashMap<>();
         claims.put("sub", "testsub");
+        claims.put("email", "test@example.com");
 
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
 
         OAuth2User oidcUser = new DefaultOidcUser(authorities, new OidcIdToken("sampletoken", Instant.MIN, Instant.MAX, claims));
-        OAuth2AuthenticationToken token = new OAuth2AuthenticationToken(oidcUser, authorities, "test-client");
+        OAuth2AuthenticationToken token = new OAuth2AuthenticationToken(oidcUser, authorities, "google");
+
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(token);
+
         return context;
     }
 }

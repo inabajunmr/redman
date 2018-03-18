@@ -19,10 +19,11 @@ import org.springframework.test.web.servlet.MockMvc;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ResourceNewControllerTest {
+public class ResourceNewControllerIntegrationTest {
 
 	/**
 	 * MockMvc.
+	 *
 	 */
 	@Autowired
 	private MockMvc mockMvc;

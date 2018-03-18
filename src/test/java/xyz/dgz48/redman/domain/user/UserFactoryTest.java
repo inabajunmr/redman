@@ -25,12 +25,12 @@ public class UserFactoryTest {
 	/**
 	 * {@User} for test.
 	 */
-	private final User testUser = new User("id", "name", IdpType.GOOGLE);
+	private final User testUser = new User("id", "name", "test@example.com", IdpType.GOOGLE);
 
 	/**
 	 * {@UserEntity} for test.
 	 */
-	private final UserEntity testUserEntity = new UserEntity("id", "name", IdpType.GOOGLE);
+	private final UserEntity testUserEntity = new UserEntity("id", "name", "test@example.com", IdpType.GOOGLE);
 
 	/**
 	 * create.
@@ -69,4 +69,21 @@ public class UserFactoryTest {
 
 	}
 
+	/**
+	 * createWithRandomId by authentication.
+	 */
+	@Test
+	public void createWithRandomId() {
+		// set up
+		String name = "testName";
+
+		// exercise
+		User actual = sut.createWithRandomId(name, "test@example.com", IdpType.GOOGLE);
+
+		// verify
+		assertThat(actual.getUserId()).isNotNull();
+		assertThat(actual.getIdpUserName()).isEqualTo(name);
+		assertThat(actual.getIdpType()).isEqualTo(IdpType.GOOGLE);
+
+	}
 }

@@ -48,7 +48,7 @@ public class UserServiceTest {
 	/**
 	 * {@link UserEntity} for test.
 	 */
-	private final UserEntity testUserEntity = new UserEntity("id", "name", IdpType.GOOGLE);
+	private final UserEntity testUserEntity = new UserEntity("id", "name", "test@example.com", IdpType.GOOGLE);
 
 
 	/**
