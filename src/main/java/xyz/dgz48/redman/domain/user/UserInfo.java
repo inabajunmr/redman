@@ -28,4 +28,9 @@ public class UserInfo implements Serializable {
 	 * メールアドレス.
 	 */
 	private String email;
+
+	/**
+	 * ユーザ画像のURL.
+	 */
+	private String pictureUrl;
 }

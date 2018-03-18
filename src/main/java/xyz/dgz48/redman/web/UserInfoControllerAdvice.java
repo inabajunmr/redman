@@ -59,6 +59,6 @@ public class UserInfoControllerAdvice {
 		User user = userByIdpUserName.orElseGet(() -> userService.saveUser(userFactory.createWithRandomId(authentication.getName(),
 				userInfoExtractor.getEmail(token.getPrincipal().getAttributes()), idpType)));
 
-		model.addAttribute("userInfo", new UserInfo(user.getUserId(), user.getEmail()));
+		model.addAttribute("userInfo", new UserInfo(user.getUserId(), user.getEmail(), userInfoExtractor.getPictureUrl(token.getPrincipal().getAttributes())));
 	}
 }

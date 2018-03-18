@@ -30,13 +30,14 @@ public class UserInfoExtractorTest {
 	@Before
 	public void init() {
 		userInfo.put("email", "test@example.com");
+		userInfo.put("picture", "http://example.com/user.jpg");
 	}
 
 	/**
-	 * Normalize by Google.
+	 * Extract email by Google.
 	 */
 	@Test
-	public void normalizeByGoogle() {
+	public void extractEmailByGoogle() {
 		// set up
 		UserInfoExtractor sut = new UserInfoExtractor(IdpType.GOOGLE);
 
@@ -48,10 +49,10 @@ public class UserInfoExtractorTest {
 	}
 
 	/**
-	 * Normalize by GitHub.
+	 * Extract email by GitHub.
 	 */
 	@Test(expected = UnsupportedOperationException.class)
-	public void normalizeByGitHub() {
+	public void extractEmailByGitHub() {
 		// set up
 		UserInfoExtractor sut = new UserInfoExtractor(IdpType.GITHUB);
 
@@ -63,15 +64,60 @@ public class UserInfoExtractorTest {
 	}
 
 	/**
-	 * Normalize by GitHub.
+	 * Extract by Other.
 	 */
 	@Test(expected = UnsupportedOperationException.class)
-	public void normalizeByOther() {
+	public void extractEmailByOther() {
 		// set up
 		UserInfoExtractor sut = new UserInfoExtractor(null);
 
 		// exercise
 		String actual = sut.getEmail(userInfo);
+
+		// verify
+		assertThat(actual).isNull();
+	}
+
+	/**
+	 * Extract picture url by Google.
+	 */
+	@Test
+	public void extractPictureUrlByGoogle() {
+		// set up
+		UserInfoExtractor sut = new UserInfoExtractor(IdpType.GOOGLE);
+
+		// exercise
+		String actual = sut.getPictureUrl(userInfo);
+
+		// verify
+		assertThat(actual).isEqualTo("http://example.com/user.jpg");
+	}
+
+	/**
+	 * Extract picture url by GitHub.
+	 */
+	@Test(expected = UnsupportedOperationException.class)
+	public void extractPictureUrlByGitHub() {
+		// set up
+		UserInfoExtractor sut = new UserInfoExtractor(IdpType.GITHUB);
+
+		// exercise
+		String actual = sut.getPictureUrl(userInfo);
+
+		// verify
+		assertThat(actual).isNull();
+	}
+
+	/**
+	 * Extract picture url by Other.
+	 */
+	@Test(expected = UnsupportedOperationException.class)
+	public void extractPictureUrlByOther() {
+		// set up
+		UserInfoExtractor sut = new UserInfoExtractor(null);
+
+		// exercise
+		String actual = sut.getPictureUrl(userInfo);
 
 		// verify
 		assertThat(actual).isNull();
