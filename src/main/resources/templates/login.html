@@ -13,7 +13,13 @@
 			<p class="login-box-msg">Sign in to start your session</p>
 
 			<div class="social-auth-links text-center">
-				<a href="#" th:href="@{/oauth2/authorization/google}" class=""><img th:src="@{/img/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png}" class="signin_google" /></a>
+				<a class="btn btn-lg btn-block btn-social btn-google" href="#" th:href="@{/oauth2/authorization/google}">
+					<span class="fa fa-google"></span> Sign in with Google
+				</a>
+
+				<a class="btn btn-lg btn-block btn-social btn-github" href="#" th:href="@{/oauth2/authorization/github}">
+					<span class="fa fa-github"></span> Sign in with GitHub
+				</a>
 			</div>
 
 		</div>

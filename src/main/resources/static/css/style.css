@@ -102,6 +102,3 @@
 .mgb49 { margin-bottom: 49px; }
 .mgb50 { margin-bottom: 50px; }
 
-.signin_google { background: url("../img/google_signin_buttons/web/1x/btn_google_signin_light_normal_web.png") no-repeat; }
-.signin_google:hover { background: url("../img/google_signin_buttons/web/1x/btn_google_signin_light_focus_web.png") no-repeat; }
-
