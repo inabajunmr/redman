@@ -21,6 +21,9 @@ spring:
     google:
       client-id: xxxxx
       client-secret: xxxxx
+    github:
+      client-id: xxxxx
+      client-secret: xxxxx
   jmx:
     enable: false
   mvc:
