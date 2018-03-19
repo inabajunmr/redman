@@ -40,4 +40,3 @@ APIを叩くフローの定義。リソースをこの順番で、このタイ�
 
 # How deploy to development environment automaticaly?
 GitHubへPUSH→CircleCI→S3にファイルアップ→S3をトリガーにCodePipelineが起動→CodeDeployがキックされてEC2にデプロイ
-# How deploy to development environment automaticaly?
