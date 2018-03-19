@@ -44,7 +44,6 @@ dependencyManagement {
 	}
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -81,6 +80,7 @@ jacoco {
 }
 
 bootJar {
+	archiveName = artifactId + '.jar'
 	mainClassName = 'xyz.dgz48.redman.Application'
 	manifest {
 		attributes 'Start-Class': 'xyz.dgz48.redman.Application'
@@ -92,6 +92,14 @@ bootJar {
 	}
 	launchScript()
 }
+
+task createCodeDeployArchive(type: Zip, dependsOn: bootJar) {
+	from "${project.buildDir}/libs/"
+	from 'src/main/codedeploy/'
+	archiveName artifactId + '-codedeploy.zip'
+	destinationDir file("${project.buildDir}/distributions")
+}
+build.dependsOn createCodeDeployArchive
 
 jacocoTestReport {
 	reports {

@@ -22,3 +22,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+management.endpoints:
+    jmx.exposure:
+        include: '*'
+        exclude: shutdown
+    web.exposure:
+        include: '*'
+        exclude: shutdown

@@ -1,7 +1,7 @@
 version: 2
 ## Customize the test machine
 jobs:
-  test:
+  build:
     docker:
       - image: java:openjdk-8-jdk
         environment:
@@ -10,6 +10,12 @@ jobs:
       - checkout
       - run: chmod +x ./gradlew # Grant execution permission
       - run: ./gradlew --quiet javadoc build
+      - save_cache: 
+          key: redman-{{ epoch }}
+          paths: 
+            - build
+      - store_artifacts:
+          path: build/distributions
       - store_artifacts:
           path: build/libs
       - store_artifacts:
@@ -18,8 +24,32 @@ jobs:
           path: build/reports
       - store_test_results:
           path: build/test-results
+  deploy: 
+    docker:
+      - image: java:openjdk-8-jdk
+        environment:
+          TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+    steps: 
+      - restore_cache: 
+          keys: redman
+      - run: apt-get -y update
+      - run: apt-get -y install python-pip
+      - run: pip install awscli --upgrade
+      - run: mkdir sync_target
+      - run: cp -pr build/distributions sync_target/
+      - run: cp -pr build/libs sync_target/
+      - run: cp -pr build/docs sync_target/
+      - run: cp -pr build/reports sync_target/
+      - run: cp -pr build/test-results sync_target/
+      - run: aws s3 sync sync_target s3://dgz48-redman-dev-ci/ --delete --exact-timestamps
 workflows:
   version: 2
-  build_and_test:
+  build_and_deploy:
     jobs:
-      - test
+      - build 
+      - deploy: 
+          requires: 
+            - build 
+          filters: 
+            branches: 
+              only: master
