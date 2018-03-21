@@ -25,7 +25,7 @@ public class DevelopmentController {
 	 */
 	@GetMapping("/starter.html")
 	public String viewStarter(final Model model) {
-		return "/starter";
+		return "starter";
 	}
 
 }

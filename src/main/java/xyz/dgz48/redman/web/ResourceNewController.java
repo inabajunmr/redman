@@ -26,7 +26,7 @@ public class ResourceNewController {
 	 */
 	@GetMapping("/input.html")
 	public String viewInput(final Model model) {
-		return "/resource/new/input";
+		return "resource/new/input";
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class ResourceNewController {
 	 */
 	@GetMapping(path = "/confirm.html")
 	public String viewConfirm(final Model model) {
-		return "/resource/new/confirm";
+		return "resource/new/confirm";
 	}
 
 	/**
@@ -70,6 +70,6 @@ public class ResourceNewController {
 	 */
 	@GetMapping(path = "/complete.html")
 	public String viewComplete(final Model model) {
-		return "/resource/new/complete";
+		return "resource/new/complete";
 	}
 }

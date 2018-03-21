@@ -22,7 +22,7 @@ public class ResourceViewController {
 	 */
 	@GetMapping("/resource/list.html")
 	public String viewList(final Model model) {
-		return "/resource/list";
+		return "resource/list";
 	}
 
 	/**
@@ -34,6 +34,6 @@ public class ResourceViewController {
 	 */
 	@GetMapping(path = "/resource/{id}/detail.html")
 	public String viewDetail(final Model model, @PathVariable("id") final String id) {
-		return "/resource/detail";
+		return "resource/detail";
 	}
 }
