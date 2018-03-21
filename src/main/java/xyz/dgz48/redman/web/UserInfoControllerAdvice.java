@@ -31,6 +31,9 @@ public class UserInfoControllerAdvice {
 	@Autowired
 	private UserFactory userFactory;
 
+	@Autowired
+	UserInfoExtractor userInfoExtractor;
+
 	/**
 	 * Create {@link UserInfo} and set to model.
 	 * @param model model
@@ -54,11 +57,10 @@ public class UserInfoControllerAdvice {
 		OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
 		IdpType idpType = IdpType.findByClientRegistrationId(token.getAuthorizedClientRegistrationId());
 
-		UserInfoExtractor userInfoExtractor = new UserInfoExtractor(idpType);
 		Optional<User> userByIdpUserName = userService.findUserByIdpUserName(token.getName(), idpType);
 		User user = userByIdpUserName.orElseGet(() -> userService.saveUser(userFactory.createWithRandomId(authentication.getName(),
-				userInfoExtractor.getEmail(token.getPrincipal().getAttributes()), idpType)));
+				userInfoExtractor.getEmail(token), idpType)));
 
-		model.addAttribute("userInfo", new UserInfo(user.getUserId(), user.getEmail(), userInfoExtractor.getPictureUrl(token.getPrincipal().getAttributes())));
+		model.addAttribute("userInfo", new UserInfo(user.getUserId(), user.getEmail(), userInfoExtractor.getPictureUrl(token)));
 	}
 }
