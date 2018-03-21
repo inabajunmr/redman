@@ -3,6 +3,7 @@ package xyz.dgz48.redman.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * Configuration about security.
@@ -17,7 +18,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/css/**", "/img/**", "/js/**", "/lib/**", "/actuator/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .logout().permitAll()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
                 .and()
                 .oauth2Login()
                 .loginPage("/login").permitAll();

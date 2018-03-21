@@ -94,7 +94,9 @@ Make sure you apply the skin class to the body tag so the changes take effect.
 										<a href="#" class="btn btn-default btn-flat">Profile</a>
 									</div>
 									<div class="pull-right">
-										<a href="#" class="btn btn-default btn-flat">Sign out</a>
+										<form action="#" th:action="@{/logout}" method="post">
+											<button class="btn btn-default btn-flat" type="submit" value="POST" >Sign out</button>
+										</form>
 									</div>
 								</li>
 							</ul>
