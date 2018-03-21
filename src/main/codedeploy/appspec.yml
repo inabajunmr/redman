@@ -8,6 +8,10 @@ hooks:
     - location: scripts/clean.sh
       timeout: 300
       runas: root
+  AfterInstall: 
+    - location: scripts/afterinstall.sh
+      timeout: 300
+      runas: root
   ApplicationStop:
     - location: scripts/appstop.sh
       timeout: 300
