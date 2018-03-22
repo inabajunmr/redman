@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: redman.jar
-    destination: /opt/redman/
+    destination: /var/redman/
 hooks:
   BeforeInstall:
     - location: scripts/clean.sh
