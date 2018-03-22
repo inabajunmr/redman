@@ -1,3 +1,3 @@
 #!/bin/sh
 
-service redman stop
+systemctl stop redman.service
