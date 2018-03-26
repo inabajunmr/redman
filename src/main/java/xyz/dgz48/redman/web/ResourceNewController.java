@@ -26,6 +26,7 @@ public class ResourceNewController {
 	 */
 	@GetMapping("/input.html")
 	public String viewInput(final Model model) {
+		log.debug("TODO view input"); // TODO view input
 		return "resource/new/input";
 	}
 
@@ -37,6 +38,7 @@ public class ResourceNewController {
 	 */
 	@PostMapping(path = "/input.html")
 	public String validate(final Model model) {
+		log.debug("TODO validate"); // TODO validate
 		return "redirect:/resource/new/confirm.html";
 	}
 
@@ -48,6 +50,7 @@ public class ResourceNewController {
 	 */
 	@GetMapping(path = "/confirm.html")
 	public String viewConfirm(final Model model) {
+		log.debug("TODO view confirm"); // TODO view confirm
 		return "resource/new/confirm";
 	}
 
@@ -59,6 +62,7 @@ public class ResourceNewController {
 	 */
 	@PostMapping(path = "/confirm.html")
 	public String register(final Model model) {
+		log.debug("TODO register"); // TODO register
 		return "redirect:/resource/new/complete.html";
 	}
 
@@ -70,6 +74,7 @@ public class ResourceNewController {
 	 */
 	@GetMapping(path = "/complete.html")
 	public String viewComplete(final Model model) {
+		log.debug("TODO view complete"); // TODO view complete
 		return "resource/new/complete";
 	}
 }

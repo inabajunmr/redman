@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/base.html}">
+<head>
+<title layout:fragment="title">404 - redman</title>
+</head>
+<body>
+	<!--/* Content-Header title */-->
+	<h1 layout:fragment="content-header-h1">404 <small>Page not found</small></h1>
+
+	<!--/* breadcrumb */-->
+	<ol layout:fragment="breadcrumb">
+		<li><a th:href="@{/index.html}"><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">Here</li>
+	</ol>
+
+	<!--/* Main content */-->
+	<section layout:fragment="main-content">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="error-page">
+					<h2 class="headline text-yellow">404</h2>
+
+					<div class="error-content">
+						<h3>
+							<i class="fa fa-warning text-yellow"></i> Oops! Page not found.
+						</h3>
+
+						<p>
+							We could not find the page you were looking for. Meanwhile, you may <a href="../../index.html" th:href="@{/index.html}">return to dashboard</a>.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

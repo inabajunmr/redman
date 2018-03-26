@@ -5,7 +5,6 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 /**
  * Controller for login.
  */
@@ -19,7 +18,7 @@ public class LoginController {
      * @param authentication authentication info
      * @return index page
      */
-    @GetMapping("/")
+    @GetMapping({"/", "/index.html"})
     public String index(final OAuth2AuthenticationToken authentication) {
         log.info("Login user:{} from:{}",
                 authentication.getName(), authentication.getAuthorizedClientRegistrationId());
