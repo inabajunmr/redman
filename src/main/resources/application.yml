@@ -24,6 +24,8 @@ spring:
     github:
       client-id: xxxxx
       client-secret: xxxxx
+      scope: user:email
+
   jmx:
     enable: false
   mvc:

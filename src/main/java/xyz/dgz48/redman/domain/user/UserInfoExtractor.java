@@ -1,15 +1,24 @@
 package xyz.dgz48.redman.domain.user;
 
+import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.RequestEntity;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.*;
+import org.springframework.http.client.ClientHttpRequestExecution;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -49,23 +58,73 @@ public class UserInfoExtractor {
 		}
 
 		if (idpType == IdpType.GITHUB) {
-			OAuth2AuthorizedClient authorizedClient = getAuthorizedClient(oAuth2AuthenticationToken);
-			// TODO こいつが取ってこれない
-			String userInfoUri = authorizedClient.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUri() + "/email";
-			RequestEntity<Void> requestEntity = RequestEntity.get(URI.create(userInfoUri))
-					.header(HttpHeaders.AUTHORIZATION, "Bearer " + authorizedClient.getAccessToken().getTokenValue())
-					.build();
-			Map body = restOperations.exchange(requestEntity, Map.class).getBody();
-			ObjectMapper mapper = new ObjectMapper();
-			try {
-				log.info("★★★★★★");
-				log.info(mapper.writeValueAsString(body));
-			} catch (JsonProcessingException e) {
-				e.printStackTrace();
-			}
+			OAuth2AuthorizedClient client =
+					oAuth2AuthorizedClientService.loadAuthorizedClient(
+							oAuth2AuthenticationToken.getAuthorizedClientRegistrationId(),
+							oAuth2AuthenticationToken.getName());
+
+			String accessToken = client.getAccessToken().getTokenValue();
+			RestTemplate restTemplate = new RestTemplate();
+			restTemplate.getInterceptors()
+					.add(getBearerTokenInterceptor(accessToken));
+			System.out.println("GET EMAIL FROM GITHUB");
+
+
+//			ResponseEntity<List<GitHubEmail>> emails =
+//					restTemplate.exchange("https://api.github.com/user/emails",
+//							HttpMethod.GET, null, new ParameterizedTypeReference<List<GitHubEmail>>() {
+//							})
+			Object[] forObject = restTemplate.getForObject("https://api.github.com/user/emails", Object[].class);
+			Arrays.stream(forObject).forEach(o -> {
+				try {
+					System.out.println(new ObjectMapper().writeValueAsString(o));
+				} catch (JsonProcessingException e) {
+					e.printStackTrace();
+				}
+			});
+
+//			emails.getBody().forEach(System.out::println);
+
+			return null;
 		}
 
 		throw new UnsupportedOperationException("null is not implemented idp.");
+	}
+
+//	@Data
+//	@AllArgsConstructor
+//	class GitHubEmail{
+//
+//		String email;
+//		boolean verified;
+//		boolean primary;
+//		String visibility;
+//
+//	}
+
+	private ClientHttpRequestInterceptor
+	getBearerTokenInterceptor(String accessToken) {
+		ClientHttpRequestInterceptor interceptor =
+				new ClientHttpRequestInterceptor() {
+					@Override
+					public ClientHttpResponse intercept(HttpRequest request, byte[] bytes,
+														ClientHttpRequestExecution execution) throws IOException {
+						request.getHeaders().add("Authorization", "Bearer " + accessToken);
+						return execution.execute(request, bytes);
+					}
+				};
+		return interceptor;
+	}
+
+	private ClientHttpRequestInterceptor getNoTokenInterceptor() {
+		return new ClientHttpRequestInterceptor() {
+			@Override
+			public ClientHttpResponse intercept(HttpRequest request, byte[] bytes,
+												ClientHttpRequestExecution execution) throws IOException {
+				throw new IllegalStateException(
+						"Can't access the API without an access token");
+			}
+		};
 	}
 
 	private OAuth2AuthorizedClient getAuthorizedClient(OAuth2AuthenticationToken authentication) {
