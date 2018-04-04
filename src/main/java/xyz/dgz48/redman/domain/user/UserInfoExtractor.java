@@ -1,21 +1,13 @@
 package xyz.dgz48.redman.domain.user;
 
-import java.io.IOException;
 import java.util.Arrays;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.*;
-import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestOperations;
@@ -28,13 +20,8 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 public class UserInfoExtractor {
 
-	private final RestOperations restOperations = new RestTemplate();
-
 	@Autowired
 	private OAuth2AuthorizedClientService oAuth2AuthorizedClientService;
-
-	@Autowired
-	ClientRegistrationRepository clientRegistrationRepository;
 
 	/**
 	 * {@link IdpType}に合わせた方法でメールアドレスを抽出する.
@@ -67,12 +54,30 @@ public class UserInfoExtractor {
 		throw new UnsupportedOperationException("null is not implemented idp.");
 	}
 
+	/**
+	 * Response for https://api.github.com/user/emails.
+	 */
 	@Value
 	static class GitHubEmail{
 
+		/**_
+		 * email.
+		 */
 		private String email;
+
+		/**_
+		 * verified.
+		 */
 		private boolean verified;
+
+		/**_
+		 * primary.
+		 */
 		private boolean primary;
+
+		/**_
+		 * visibility.
+		 */
 		private String visibility;
 
 	}
@@ -80,13 +85,9 @@ public class UserInfoExtractor {
 	private ClientHttpRequestInterceptor
 	getBearerTokenInterceptor(String accessToken) {
 		ClientHttpRequestInterceptor interceptor =
-				new ClientHttpRequestInterceptor() {
-					@Override
-					public ClientHttpResponse intercept(HttpRequest request, byte[] bytes,
-														ClientHttpRequestExecution execution) throws IOException {
-						request.getHeaders().add("Authorization", "Bearer " + accessToken);
-						return execution.execute(request, bytes);
-					}
+				(request, bytes, execution) -> {
+					request.getHeaders().add("Authorization", "Bearer " + accessToken);
+					return execution.execute(request, bytes);
 				};
 		return interceptor;
 	}
